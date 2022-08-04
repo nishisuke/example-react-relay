@@ -3,8 +3,33 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
-  return (
+import { useQuery, ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+
+const GET_USERS = gql`
+query User {
+  users {
+    id, name, friends {
+      id, name, friends {
+        id, name
+      }
+    } 
+  }
+}
+`;
+
+
+const client = new ApolloClient({
+  uri: 'http://localhost:8080/query',
+  cache: new InMemoryCache(),
+});
+
+const Content = () => {
+  const { loading, error, data } = useQuery(GET_USERS);
+
+console.log(data)
+
+return (
+
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
@@ -66,6 +91,15 @@ const Home: NextPage = () => {
         </a>
       </footer>
     </div>
+)
+}
+
+const Home: NextPage = () => {
+
+  return (
+  <ApolloProvider client={client}>
+<Content />
+  </ApolloProvider >
   )
 }
 
