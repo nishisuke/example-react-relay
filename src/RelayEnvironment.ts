@@ -1,13 +1,12 @@
 import {Environment, Network, RecordSource, Store} from 'relay-runtime';
 import fetchGraphQL from './fetchGraphQL';
 
-async function fetchRelay(params: {name: string, text: string}, variables: any) {
-  console.log(`fetching query ${params.name} with ${JSON.stringify(variables)}`);
-  return fetchGraphQL(params.text, variables);
-}
-
 // Export a singleton instance of Relay Environment configured with our network function:
 export default new Environment({
-  network: Network.create(fetchRelay),
+  network: Network.create(
+async (params, variables ) => {
+  console.log(`fetching query ${params.name} with ${JSON.stringify(variables)}`);
+  return fetchGraphQL(params.text, variables);
+}),
   store: new Store(new RecordSource()),
 });
