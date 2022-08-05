@@ -2,7 +2,7 @@ import { FC } from 'react'
 import {graphql, useFragment} from 'react-relay'
 import {User} from './User';
 
-import type {TodoComponent_todo$key} from '../__generated__/TodoComponent_todo.graphql';
+import type {TodoComponent_todo$key} from 'src/__generated__/TodoComponent_todo.graphql';
 
 interface Props {
   todo: TodoComponent_todo$key,

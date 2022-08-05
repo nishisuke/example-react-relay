@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import {graphql, useFragment} from 'react-relay'
 
-import type {UserComponent_user$key} from '../__generated__/UserComponent_user.graphql';
+import type {UserComponent_user$key} from 'src/__generated__/UserComponent_user.graphql';
 
 interface Props {
   user: UserComponent_user$key,
