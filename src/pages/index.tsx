@@ -13,15 +13,9 @@ const preload = loadQuery<TodosQueryType>(RelayEnvironment, TodosQuery, {})
 
 const Home: NextPage = () => {
 
-const [queryRef , load]= useQueryLoader<TodosQueryType>(TodosQuery, preload)
-console.log(queryRef)
-
 return (
 <>
-{queryRef && <Todos queryRef={queryRef} />}
-<button onClick={() => load({})}>
-hey
-</button>
+<Todos queryRef={preload} />
 </>
 
 )
