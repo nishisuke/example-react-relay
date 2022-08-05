@@ -1,35 +1,33 @@
-import { FC } from 'react'
-import {graphql, useFragment} from 'react-relay'
-import {User} from './User';
+import { FC } from "react";
+import { graphql, useFragment } from "react-relay";
+import { User } from "./User";
 
-import type {TodoComponent_todo$key} from 'src/__generated__/TodoComponent_todo.graphql';
+import type { TodoComponent_todo$key } from "src/__generated__/TodoComponent_todo.graphql";
 
 interface Props {
-  todo: TodoComponent_todo$key,
+  todo: TodoComponent_todo$key;
 }
-
-
 
 export const Todo: FC<Props> = (props) => {
- const todo = useFragment(
+  const todo = useFragment(
     graphql`
-    fragment TodoComponent_todo on Todo {
+      fragment TodoComponent_todo on Todo {
         text
         done
-user {
-...UserComponent_user
-}
+        user {
+          ...UserComponent_user
+        }
       }
     `,
-    props.todo,
+    props.todo
   );
 
   return (
     <>
-    <div>{todo.text}
-<User user={todo.user} />
-
-</div>
+      <div>
+        {todo.text}
+        <User user={todo.user} />
+      </div>
     </>
-  )
-}
+  );
+};

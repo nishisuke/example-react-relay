@@ -1,8 +1,8 @@
-async function fetchGraphQL(text: string | null |undefined, variables: any) {
-  const response = await fetch('http://localhost:8080/query', {
-    method: 'POST',
+async function fetchGraphQL(text: string | null | undefined, variables: any) {
+  const response = await fetch("http://localhost:8080/query", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       query: text,

@@ -1,26 +1,25 @@
-import { FC } from 'react'
-import {graphql, useFragment} from 'react-relay'
+import { FC } from "react";
+import { graphql, useFragment } from "react-relay";
 
-import type {UserComponent_user$key} from 'src/__generated__/UserComponent_user.graphql';
+import type { UserComponent_user$key } from "src/__generated__/UserComponent_user.graphql";
 
 interface Props {
-  user: UserComponent_user$key,
-
+  user: UserComponent_user$key;
 }
 
 export const User: FC<Props> = (props) => {
- const user = useFragment(
+  const user = useFragment(
     graphql`
-    fragment UserComponent_user on User {
+      fragment UserComponent_user on User {
         name
       }
     `,
-    props.user,
+    props.user
   );
 
   return (
     <>
-    <div>{user.name}</div>
+      <div>{user.name}</div>
     </>
-  )
-}
+  );
+};
