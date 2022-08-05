@@ -10,6 +10,7 @@
     "relay": "relay-compiler"
   },
   "relay": {
+    "artifactDirectory": "./src/__generated__",
     "src": "./src/",
     "schema": "./schema.graphql",
     "language": "typescript"

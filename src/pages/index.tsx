@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
 
 
-import TodosQuery from '../Component/__generated__/TodosQuery.graphql'
-import type {TodosQuery as TodosQueryType}  from '../Component/__generated__/TodosQuery.graphql'
+import TodosQuery from '../__generated__/TodosQuery.graphql'
+import type {TodosQuery as TodosQueryType}  from '../__generated__/TodosQuery.graphql'
 
 
 import {useQueryLoader,loadQuery } from 'react-relay'

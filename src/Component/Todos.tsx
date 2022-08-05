@@ -1,5 +1,5 @@
 
-import type {TodosQuery} from './__generated__/TodosQuery.graphql';
+import type {TodosQuery} from '../__generated__/TodosQuery.graphql';
 
 import type {PreloadedQuery} from 'react-relay';
 
