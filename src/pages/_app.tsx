@@ -1,8 +1,15 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import {
+  RelayEnvironmentProvider,
+} from 'react-relay/hooks';
+
+import RelayEnvironment from '../RelayEnvironment';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return <RelayEnvironmentProvider environment={RelayEnvironment}>
+<Component {...pageProps} />
+    </RelayEnvironmentProvider>
 }
 
 export default MyApp
