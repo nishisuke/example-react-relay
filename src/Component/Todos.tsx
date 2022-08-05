@@ -29,7 +29,6 @@ id
     props.queryRef,
   );
 
-console.log(data,'data')
   return (
     <>
 {data.todos.map(t => <Todo key={t.id} todo={t}/>)}
