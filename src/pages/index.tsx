@@ -1,18 +1,48 @@
 import type { NextPage } from "next";
+import type { pagesTodosQuery as pagesTodosQueryType } from "src/__generated__/pagesTodosQuery.graphql";
 
-import TodosQuery from "src/__generated__/TodosQuery.graphql";
-import type { TodosQuery as TodosQueryType } from "src/__generated__/TodosQuery.graphql";
-
-import { useQueryLoader, loadQuery } from "react-relay";
+import { graphql, useLazyLoadQuery } from "react-relay";
 import { Todos } from "../Component/Todos";
-import RelayEnvironment from "../RelayEnvironment";
 
-const preload = loadQuery<TodosQueryType>(RelayEnvironment, TodosQuery, {});
+interface Props {}
+const Home: NextPage<Props> = (props) => {
+  const data = useLazyLoadQuery<pagesTodosQueryType>(
+    graphql`
+      query pagesTodoQuery {
+        ...TodosComponent_todos
+      }
+    `,
+    {}
+  );
 
-const Home: NextPage = () => {
+  // const [commitMutation, isMutationInFlight] = useMutation<LikeButtonMutation>(
+  //    graphql`
+  //      mutation Foo($input: NewTodo!) {
+  //        createTodo(input: $input) {
+  //          todo {
+  //i
+  //          }
+  //        }
+  //      }
+  //    `
+  //  );
+  //
+
   return (
     <>
-      <Todos queryRef={preload} />
+      <Todos todos={data} />
+      {/*
+   <button
+    onClick={() => commitMutation({
+      variables: {
+        input: {id: feedbackId},
+      },
+    })}
+    disabled={isMutationInFlight}
+  >
+Add
+  </button>
+*/}
     </>
   );
 };

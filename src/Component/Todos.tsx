@@ -1,27 +1,25 @@
-import type { TodosQuery } from "src/__generated__/TodosQuery.graphql";
-
-import type { PreloadedQuery } from "react-relay";
+import type { TodosComponent_todos$key } from "src/__generated__/TodosComponent_todos.graphql";
 
 import { FC } from "react";
-import { graphql, usePreloadedQuery } from "react-relay";
+import { graphql, useFragment } from "react-relay";
 
 import { Todo } from "./Todo";
 
 interface Props {
-  queryRef: PreloadedQuery<TodosQuery>;
+  todos: TodosComponent_todos$key;
 }
 
 export const Todos: FC<Props> = (props) => {
-  const data = usePreloadedQuery<TodosQuery>(
+  const data = useFragment(
     graphql`
-      query TodosQuery {
+      fragment TodosComponent_todos on Query {
         todos {
           id
           ...TodoComponent_todo
         }
       }
     `,
-    props.queryRef
+    props.todos
   );
 
   return (
