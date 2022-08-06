@@ -1,4 +1,4 @@
-import type { TodosComponent_todos$key } from "src/__generated__/TodosComponent_todos.graphql";
+import type { TodosComponent_todo_connection$key } from "src/__generated__/TodosComponent_todo_connection.graphql";
 
 import { FC } from "react";
 import { graphql, useFragment } from "react-relay";
@@ -6,16 +6,18 @@ import { graphql, useFragment } from "react-relay";
 import { Todo } from "./Todo";
 
 interface Props {
-  todos: TodosComponent_todos$key;
+  todos: TodosComponent_todo_connection$key;
 }
 
 export const Todos: FC<Props> = (props) => {
   const data = useFragment(
     graphql`
-      fragment TodosComponent_todos on Query {
-        todos {
-          id
-          ...TodoComponent_todo
+      fragment TodosComponent_todo_connection on TodoConnection {
+        edges {
+          node {
+            id
+            ...TodoComponent_todo
+          }
         }
       }
     `,
@@ -24,8 +26,8 @@ export const Todos: FC<Props> = (props) => {
 
   return (
     <>
-      {data.todos.map((t) => (
-        <Todo key={t.id} todo={t} />
+      {data.edges.map((e) => (
+        <Todo key={e.node.id} todo={e.node} />
       ))}
     </>
   );
