@@ -10,9 +10,7 @@ const Home: NextPage<Props> = () => {
   const data = useLazyLoadQuery<pagesTodosQueryType>(
     graphql`
       query pagesTodosQuery($first: Int, $after: String) {
-        todos(first: $first, after: $after) {
-          ...TodosComponent_todo_connection
-        }
+        ...TodosComponent_query
       }
     `,
     { first: 4, after: "aaaa" }
@@ -32,7 +30,7 @@ const Home: NextPage<Props> = () => {
 
   return (
     <>
-      <Todos todos={data.todos} />
+      <Todos todos={data} />
       <button
         onClick={() =>
           commitMutation({
