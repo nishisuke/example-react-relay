@@ -1,6 +1,7 @@
 import type { TodosComponent_query$key } from "src/__generated__/TodosComponent_query.graphql";
 import type { TodosCreateTodoMutation } from "src/__generated__/TodosCreateTodoMutation.graphql";
 import { graphql, useFragment, useMutation } from "react-relay";
+import { User } from "./User";
 
 import { FC } from "react";
 
@@ -21,6 +22,9 @@ export const Todos: FC<Props> = (props) => {
             node {
               id
               ...TodoComponent_todo
+              user {
+                ...UserComponent_user
+              }
             }
           }
         }
@@ -46,7 +50,11 @@ export const Todos: FC<Props> = (props) => {
   return (
     <>
       {data.todos.edges.map((e) => (
-        <Todo key={e.node.id} todo={e.node} />
+        <Todo
+          key={e.node.id}
+          todo={e.node}
+          user={<User user={e.node.user} />}
+        />
       ))}
       <button
         onClick={() =>

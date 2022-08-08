@@ -1,11 +1,11 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { graphql, useFragment } from "react-relay";
-import { User } from "./User";
 
 import type { TodoComponent_todo$key } from "src/__generated__/TodoComponent_todo.graphql";
 
 interface Props {
   todo: TodoComponent_todo$key;
+  user: ReactNode;
 }
 
 export const Todo: FC<Props> = (props) => {
@@ -14,9 +14,6 @@ export const Todo: FC<Props> = (props) => {
       fragment TodoComponent_todo on Todo {
         text
         done
-        user {
-          ...UserComponent_user
-        }
       }
     `,
     props.todo
@@ -26,7 +23,7 @@ export const Todo: FC<Props> = (props) => {
     <>
       <div>
         {todo.text}
-        <User user={todo.user} />
+        {props.user}
       </div>
     </>
   );
