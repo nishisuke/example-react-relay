@@ -12,7 +12,7 @@ const Home: NextPage<Props> = () => {
         ...TodosComponent_query
       }
     `,
-    { first: 4, after: "aaaa" }
+    {}
   );
 
   return (

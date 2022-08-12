@@ -7,11 +7,13 @@ type Todo {
   text: String!
   done: Boolean!
   user: User!
+  userID: ID!
 }
 
 type User {
   id: ID!
   name: String!
+  todos(first: Int, after: String): TodoConnection!
 }
 
 type Query {
@@ -19,6 +21,7 @@ type Query {
 }
 
 type TodoConnection {
+  totalCount: Int!
   edges: [TodoEdge!]!
   pageInfo: PageInfo!
 }
